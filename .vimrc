@@ -2,7 +2,7 @@
 "=====================================================
 "Vundle Stuff
 "====================================================
-
+let mapleader = "\<Space>"
 set nocompatible
 filetype off
 
@@ -19,18 +19,18 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-runner'
+Plugin 'christoomey/vim-system-copy'
+Plugin 'thoughtbot/vim-rspec'
 
 "All of your Plugins must be added before the following line
 call vundle#end()		"required	
 filetype plugin indent on 	"required
 
-
 "=======================================================================================================
 " General Vim Settings <from https://github.com/christoomey/dotfiles/blob/master/vim/rcfiles/general>
 "=======================================================================================================
-
-
-filetype plugin indent on
 
 set backspace=2      " Backspace deletes like most programs in insert mode
 set nobackup
@@ -43,6 +43,13 @@ set incsearch        " do incremental searching
 set laststatus=2     " Always display the status line
 set autowrite        " Automatically :write before running commands
 set formatoptions-=t " Don't auto-break long lines (re-enable this for prose)
+
+" Rspec
+let g:rspec_command = "VtrSendCommandToRunner! rspec {spec}"
+map <Leader>tf :call RunCurrentSpecFile()<CR>
+map <Leader>t :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -79,3 +86,32 @@ set diffopt+=vertical
 set hidden
 
 " vim:ft=vim
+
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+
+" zoom a vim pane, <C-w>= to re-balance
+nnoremap <leader>- :wincmd_<cr>:wincmd\|<cr>
+nnoremap <leader>= :wincmd=<cr>
+
+"Vim Tmux Runner - Connect Vim and tmux to allow running lines & commands
+
+ nnoremap <leader>v- :VtrOpenRunner { "orientation": "v" }<cr>
+ nnoremap <leader>sr :VtrOpenRunner {'orientation': 'h', 'percentage': 50} <cr>
+ nnoremap <leader>vk :VtrKillRunner<cr>
+ nnoremap <leader>va :VtrAttachToPane<cr>
+ nnoremap <leader>fr :VtrFocusRunner<cr>
+ nnoremap <leader>fg :VtrSendLinesToRunner<cr>
+ nnoremap <leader>f :VtrSendFile<cr>
+
+ nnoremap <leader>sq :VtrSendKeysRaw q<cr>
+ nnoremap <leader>sd :VtrSendKeysRaw ^D<cr>
+ nnoremap <leader>sl :VtrSendKeysRaw ^L<cr>
+ nnoremap <leader>sc :VtrSendKeysRaw ^C<cr>
+ nnoremap <leader>vs :VtrSendCommandToRunner<space>
+
+"for vim-tmux-runner if using PYTHON 
+"let g:VtrStripLeadingWhitespace = 0
+"let g:VtrClearEmptyLines = 0
+"let g:VtrAppendNewline = 1
+

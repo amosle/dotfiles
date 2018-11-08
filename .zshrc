@@ -110,4 +110,9 @@ bindkey '^x^e' edit-command-line
 unsetopt correct_all
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin:/usr/local/mysql/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin:/usr/local/mysql/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/home/amos/.rvm/gems/ruby-2.5.1/bin 
+
+
+
+
+
